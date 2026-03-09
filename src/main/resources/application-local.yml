@@ -1,0 +1,23 @@
+spring:
+  application:
+    name:ai-agent
+  datasource:
+    url: jdbc:postgresql://pgm-uf6s169k1g6t3o387o.rwlb.rds.aliyuncs.com:5432/agent
+    username: ai
+    password: '@Rootroot123456'
+    driver-class-name: org.postgresql.Driver
+  ai:
+    vectorstore:
+      pgvector:
+        index-type: HNSW
+        dimensions: 1024 #1536
+        distance-type: COSINE_DISTANCE
+#        max-document-batch-size: 10000 # Optional: Maximum number of documents per batch
+    dashscope:
+      api-key: sk-88c5f22b5e9c4a258ff00f21b87bed6f
+      chat:
+        options:
+          model: qwen-plus
+#
+#    vectorstore:
+#      type: simple    # 告诉 Spring AI 不要用 pgvector

@@ -1,10 +1,22 @@
 spring:
   application:
     name:ai-agent
-  server:
-    port: 8123
-    servlet:
-      context-path: /api
+  profiles:
+    active: local
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+server:
+  port: 8123
+  servlet:
+    context-path: /api
+  tomcat:
+    # 防止大文件上传被 Tomcat 提前吞掉/拒绝
+    max-swallow-size: -1
+    # 表单提交大小限制（multipart 也会走表单解析）
+    max-http-form-post-size: 50MB
+
 
 # springdoc-openapi ??????
 springdoc:
@@ -23,3 +35,7 @@ knife4j:
   enable: true
   setting:
     language: zh_cn
+
+# SearchAPI.io 百度搜索（知识库无结果时联网回退），不配置则仅使用知识库
+searchapi:
+  api-key: ${SEARCHAPI_API_KEY:}
